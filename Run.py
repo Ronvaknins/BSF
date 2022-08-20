@@ -11,8 +11,7 @@ import sys
 import time
 def open_file(file_path):
     while not os.path.exists(file_path):
-        time.sleep(1)
-
+        pass
     if os.path.isfile(file_path):
         return open(file_path).read()
     else:
@@ -33,7 +32,12 @@ if __name__ == '__main__':
         shutil.rmtree('choice', ignore_errors=True)
     else:
         os.mkdir(choice_dir)
-
+    people_d = os.getcwd()+"/People"
+    if (os.path.isdir(people_d) == 1):
+        shutil.rmtree('People', ignore_errors=True)
+    else:
+        os.mkdir(choice_dir)
+    
     df = DetectingFaces(fileselect)
     df.detect()
     cp = ClassifiedPersons()
@@ -62,4 +66,3 @@ if __name__ == '__main__':
     people_arr = list(map(int, selection.split()))
     bsf = BlurSelectedFaces(people_arr,fileselect)
     bsf.BlurFaces()
-    shutil.rmtree('choice', ignore_errors=True)
